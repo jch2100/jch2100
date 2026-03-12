@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>반도체 VAD 영업 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <style>
+    /* ───────── Reset & Base ───────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d2e;
+      --surface2: #252840;
+      --border:   #2e3150;
+      --accent:   #4f8ef7;
+      --accent2:  #7c6af5;
+      --green:    #3ecf8e;
+      --yellow:   #f7c948;
+      --red:      #f76060;
+      --orange:   #f79b48;
+      --text:     #e4e6f0;
+      --muted:    #7c8299;
+      --card-r:   12px;
+      --gap:      16px;
+    }
+    html { font-size: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: "Pretendard", "Noto Sans KR", sans-serif; min-height: 100vh; }
+
+    /* ───────── Layout ───────── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    header .logo { font-size: 1.15rem; font-weight: 700; color: var(--accent); letter-spacing: -.3px; }
+    header .logo span { color: var(--text); }
+    header .updated { font-size: .78rem; color: var(--muted); }
+
+    /* ───────── Filters ───────── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--border);
+    }
+    .filter-bar label { font-size: .78rem; color: var(--muted); white-space: nowrap; }
+    .filter-bar select, .filter-bar input[type=date] {
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; padding: 5px 10px; font-size: .82rem; cursor: pointer;
+    }
+    .filter-bar select:focus, .filter-bar input:focus { outline: none; border-color: var(--accent); }
+    .btn-reset {
+      margin-left: auto; background: var(--accent); color: #fff; border: none;
+      border-radius: 6px; padding: 6px 16px; font-size: .82rem; cursor: pointer; font-weight: 600;
+    }
+    .btn-reset:hover { filter: brightness(1.1); }
+
+    /* ───────── Main Scroll Area ───────── */
+    main { padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ───────── Executive Summary ───────── */
+    .exec-summary {
+      background: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
+      border-radius: var(--card-r); padding: 16px 20px;
+    }
+    .exec-summary h2 { font-size: .8rem; font-weight: 600; letter-spacing: .05em; color: rgba(255,255,255,.7); margin-bottom: 8px; text-transform: uppercase; }
+    .exec-bullets { display: flex; flex-direction: column; gap: 5px; }
+    .exec-bullets li { list-style: none; font-size: .88rem; color: #fff; line-height: 1.5; }
+    .exec-bullets li::before { content: "▸ "; color: rgba(255,255,255,.6); }
+
+    /* ───────── KPI Cards ───────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--gap);
+    }
+    .kpi-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--card-r);
+      padding: 16px; display: flex; flex-direction: column; gap: 6px;
+      transition: transform .15s, border-color .15s;
+    }
+    .kpi-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .kpi-card .label { font-size: .75rem; color: var(--muted); font-weight: 500; }
+    .kpi-card .value { font-size: 1.7rem; font-weight: 700; line-height: 1; }
+    .kpi-card .sub  { font-size: .75rem; color: var(--muted); }
+    .kpi-card.accent  .value { color: var(--accent); }
+    .kpi-card.green   .value { color: var(--green); }
+    .kpi-card.yellow  .value { color: var(--yellow); }
+    .kpi-card.orange  .value { color: var(--orange); }
+    .kpi-card.red     .value { color: var(--red); }
+    .kpi-card.purple  .value { color: var(--accent2); }
+
+    /* ───────── Section Layout ───────── */
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); }
+    @media (max-width: 1100px) { .row-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 800px)  { .row-2, .row-3 { grid-template-columns: 1fr; } }
+
+    /* ───────── Card Panel ───────── */
+    .panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--card-r);
+      padding: 18px; display: flex; flex-direction: column; gap: 14px;
+    }
+    .panel-title {
+      font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+      color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .panel-title .badge {
+      background: var(--accent); color: #fff; font-size: .7rem; padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* ───────── Funnel ───────── */
+    .funnel-wrap { display: flex; flex-direction: column; gap: 5px; }
+    .funnel-row  { display: flex; align-items: center; gap: 10px; }
+    .funnel-label { width: 90px; font-size: .78rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+    .funnel-bar-wrap { flex: 1; background: var(--surface2); border-radius: 4px; height: 26px; overflow: hidden; }
+    .funnel-bar {
+      height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px;
+      font-size: .78rem; font-weight: 600; color: #fff; transition: width .5s ease;
+    }
+    .funnel-meta { width: 80px; font-size: .78rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+    .funnel-conv { font-size: .72rem; color: var(--green); white-space: nowrap; }
+
+    /* ───────── Table ───────── */
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 8px 10px; white-space: nowrap; border-bottom: 1px solid var(--border); }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; white-space: nowrap; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+
+    /* ───────── Badges / Chips ───────── */
+    .chip {
+      display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: .72rem; font-weight: 600;
+    }
+    .chip-green  { background: rgba(62,207,142,.15); color: var(--green); }
+    .chip-red    { background: rgba(247, 96, 96,.15); color: var(--red); }
+    .chip-yellow { background: rgba(247,201, 72,.15); color: var(--yellow); }
+    .chip-blue   { background: rgba(79,142,247,.15);  color: var(--accent); }
+    .chip-orange { background: rgba(247,155, 72,.15); color: var(--orange); }
+    .chip-purple { background: rgba(124,106,245,.15); color: var(--accent2); }
+
+    /* ───────── Risk Board ───────── */
+    .risk-row { display: flex; gap: 8px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .risk-row:last-child { border-bottom: none; }
+    .risk-left  { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .risk-title { font-size: .85rem; font-weight: 600; }
+    .risk-detail { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+    .risk-meta   { font-size: .73rem; color: var(--muted); }
+    .prio-high   { border-left: 3px solid var(--red);    padding-left: 10px; }
+    .prio-medium { border-left: 3px solid var(--yellow); padding-left: 10px; }
+
+    /* ───────── Tech Support bars ───────── */
+    .ts-row { display: flex; align-items: center; gap: 10px; }
+    .ts-label { width: 130px; font-size: .78rem; color: var(--muted); flex-shrink: 0; }
+    .ts-bar-wrap { flex: 1; background: var(--surface2); border-radius: 4px; height: 18px; overflow: hidden; }
+    .ts-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: .72rem; font-weight: 600; color: #fff; }
+    .ts-count { width: 40px; text-align: right; font-size: .78rem; color: var(--muted); flex-shrink: 0; }
+
+    /* ───────── Win/Loss mini-table ───────── */
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+    .comp-card {
+      background: var(--surface2); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .comp-card .name { font-size: .85rem; font-weight: 700; }
+    .comp-card .stats { display: flex; gap: 10px; font-size: .78rem; color: var(--muted); }
+    .comp-card .win-rate { font-size: 1.3rem; font-weight: 700; }
+    .comp-card .loss-bar-wrap { background: var(--surface); border-radius: 4px; height: 6px; overflow: hidden; }
+    .comp-card .win-fill { height: 100%; background: var(--green); border-radius: 4px; }
+
+    /* ───────── Heatmap ───────── */
+    .heatmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .hm-cell {
+      border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .hm-cell .hm-ind { font-size: .78rem; font-weight: 700; }
+    .hm-cell .hm-val { font-size: 1.2rem; font-weight: 700; }
+    .hm-cell .hm-sub { font-size: .72rem; color: rgba(255,255,255,.6); }
+
+    /* scroll fade on chart containers */
+    .chart-container { position: relative; width: 100%; }
+
+    /* ───────── Responsive extras ───────── */
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ HEADER ══════════════════════════════ -->
+<header>
+  <div class="logo">반도체 VAD<span> 영업 대시보드</span></div>
+  <div class="updated" id="updatedAt"></div>
+</header>
+
+<!-- ══════════════════════════════ FILTERS ══════════════════════════════ -->
+<div class="filter-bar">
+  <label>기간</label>
+  <input type="date" id="f-from" />
+  <span style="color:var(--muted)">~</span>
+  <input type="date" id="f-to" />
+
+  <label>담당 영업</label>
+  <select id="f-sales"><option value="">전체</option></select>
+
+  <label>담당 FAE</label>
+  <select id="f-fae"><option value="">전체</option></select>
+
+  <label>고객사</label>
+  <select id="f-customer"><option value="">전체</option></select>
+
+  <label>산업군</label>
+  <select id="f-industry"><option value="">전체</option></select>
+
+  <label>단계</label>
+  <select id="f-stage"><option value="">전체</option></select>
+
+  <label>경쟁사</label>
+  <select id="f-competitor"><option value="">전체</option></select>
+
+  <button class="btn-reset" onclick="resetFilters()">초기화</button>
+</div>
+
+<!-- ══════════════════════════════ MAIN ══════════════════════════════ -->
+<main>
+
+  <!-- Executive Summary -->
+  <div class="exec-summary">
+    <h2>경영진 한줄 요약</h2>
+    <ul class="exec-bullets" id="exec-bullets"></ul>
+  </div>
+
+  <!-- ① KPI Cards -->
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <!-- ② Pipeline Funnel + Stage Chart -->
+  <div class="row-2">
+    <div class="panel">
+      <div class="panel-title">② 파이프라인 퍼널 <span class="badge" id="funnel-badge">0건</span></div>
+      <div class="funnel-wrap" id="funnel-wrap"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">단계별 평균 체류기간 <span style="font-size:.72rem;color:var(--muted)">(일)</span></div>
+      <div class="chart-container" style="height:240px;">
+        <canvas id="chart-dwell"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ Customer + Industry -->
+  <div class="row-2">
+    <div class="panel">
+      <div class="panel-title">③ 고객사별 현황</div>
+      <div class="tbl-wrap">
+        <table id="tbl-customer">
+          <thead>
+            <tr>
+              <th>고객사</th>
+              <th>Active</th>
+              <th>BOM Lock</th>
+              <th>예상매출</th>
+              <th>주요리스크</th>
+              <th>경쟁사</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">산업군별 히트맵</div>
+      <div class="heatmap-grid" id="heatmap-grid"></div>
+    </div>
+  </div>
+
+  <!-- ④ Tech Support -->
+  <div class="row-2">
+    <div class="panel">
+      <div class="panel-title">④ 기술지원 유형별 건수 / BOM Lock 기여</div>
+      <div id="ts-bars" style="display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">기술지원 BOM Lock 기여 Top 5</div>
+      <div class="chart-container" style="height:240px;">
+        <canvas id="chart-ts-contrib"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ Competition -->
+  <div class="panel">
+    <div class="panel-title">⑤ 경쟁사 분석</div>
+    <div class="row-2" style="gap:var(--gap)">
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">경쟁사별 승률</div>
+        <div class="comp-grid" id="comp-grid"></div>
+      </div>
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">승/패 사유 분류</div>
+        <div class="chart-container" style="height:220px;">
+          <canvas id="chart-winloss"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ Risk Board -->
+  <div class="panel">
+    <div class="panel-title">⑥ 리스크/이슈 보드</div>
+    <div class="row-2">
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">리스크 유형별 건수</div>
+        <div class="chart-container" style="height:200px;">
+          <canvas id="chart-risk"></canvas>
+        </div>
+      </div>
+      <div id="risk-list" style="display:flex;flex-direction:column;max-height:280px;overflow-y:auto;"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// DASHBOARD ENGINE
+// ══════════════════════════════════════════════════════════════════
+
+const STAGES_ORDER = ["Lead","Spec In","Short List","EVT","DVT","PVT","BOM Lock","MP"];
+const STAGE_COLORS = {
+  "Lead":      "#4f8ef7",
+  "Spec In":   "#7c6af5",
+  "Short List":"#3ecf8e",
+  "EVT":       "#f7c948",
+  "DVT":       "#f79b48",
+  "PVT":       "#f76060",
+  "BOM Lock":  "#3ecf8e",
+  "MP":        "#4f8ef7",
+};
+
+let chartDwell = null, chartTsContrib = null, chartWinloss = null, chartRisk = null;
+
+// ─── Filter state ───
+const F = { from:"", to:"", sales:"", fae:"", customer:"", industry:"", stage:"", competitor:"" };
+
+function getFilteredProjects() {
+  return PROJECT_MASTER.filter(p => {
+    if (F.sales && p.sales !== F.sales) return false;
+    if (F.fae && p.fae !== F.fae) return false;
+    if (F.customer && p.customer !== F.customer) return false;
+    if (F.industry && p.industry !== F.industry) return false;
+    if (F.stage && p.stage !== F.stage) return false;
+    if (F.competitor && p.competitor !== F.competitor) return false;
+    if (F.from && p.startDate < F.from) return false;
+    if (F.to   && p.startDate > F.to)   return false;
+    return true;
+  });
+}
+
+function getFilteredTS(projects) {
+  const ids = new Set(projects.map(p => p.id));
+  return TECH_SUPPORT_LOG.filter(t => ids.has(t.projectId));
+}
+
+// ─── Populate filter dropdowns ───
+function populateFilters() {
+  const unique = (arr, key) => [...new Set(arr.map(r => r[key]).filter(Boolean))].sort();
+  const fill = (id, vals) => {
+    const el = document.getElementById(id);
+    vals.forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = v; el.appendChild(o); });
+  };
+  fill("f-sales",     unique(PROJECT_MASTER, "sales"));
+  fill("f-fae",       unique(PROJECT_MASTER, "fae"));
+  fill("f-customer",  unique(PROJECT_MASTER, "customer"));
+  fill("f-industry",  unique(PROJECT_MASTER, "industry"));
+  fill("f-stage",     STAGES_ORDER);
+  fill("f-competitor",unique(PROJECT_MASTER, "competitor"));
+
+  ["f-sales","f-fae","f-customer","f-industry","f-stage","f-competitor"].forEach(id => {
+    document.getElementById(id).addEventListener("change", e => { F[id.replace("f-","")] = e.target.value; render(); });
+  });
+  document.getElementById("f-from").addEventListener("change", e => { F.from = e.target.value; render(); });
+  document.getElementById("f-to"  ).addEventListener("change", e => { F.to   = e.target.value; render(); });
+}
+
+function resetFilters() {
+  Object.keys(F).forEach(k => F[k] = "");
+  document.querySelectorAll(".filter-bar select").forEach(s => s.value = "");
+  document.getElementById("f-from").value = "";
+  document.getElementById("f-to").value   = "";
+  render();
+}
+
+// ─── KPI calculation ───
+function calcKPIs(projects) {
+  const active    = projects.filter(p => p.status === "Active").length;
+  const bomLocked = projects.filter(p => ["BOM Lock","MP"].includes(p.stage)).length;
+  const mp        = projects.filter(p => p.stage === "MP").length;
+  const diir      = active > 0 ? (bomLocked / active * 100).toFixed(1) : 0;
+  const mpRate    = bomLocked > 0 ? (mp / bomLocked * 100).toFixed(1) : 0;
+  const totalRev  = projects.reduce((s,p) => s + (p.expectedRevenue || 0), 0);
+  const avgRev    = projects.length > 0 ? totalRev / projects.length : 0;
+
+  // DIBL: mean(BOM Lock date − Spec In date) using STAGE_HISTORY
+  const bomIds    = projects.filter(p => ["BOM Lock","MP"].includes(p.stage)).map(p => p.id);
+  let diblVals    = [];
+  bomIds.forEach(id => {
+    const specIn  = STAGE_HISTORY.find(h => h.projectId === id && h.stage === "Spec In");
+    const bomLock = STAGE_HISTORY.find(h => h.projectId === id && h.stage === "BOM Lock");
+    if (specIn && bomLock) {
+      const d = (new Date(bomLock.entryDate) - new Date(specIn.entryDate)) / 86400000;
+      if (d > 0) diblVals.push(d);
+    }
+  });
+  const dibl = diblVals.length > 0 ? Math.round(diblVals.reduce((a,b)=>a+b,0)/diblVals.length) : "-";
+
+  // Competition retention: Short List+ projects where same competitor throughout
+  const shortList = projects.filter(p => STAGES_ORDER.indexOf(p.stage) >= STAGES_ORDER.indexOf("Short List")).length;
+  const retained  = shortList; // simplified: all active post short-list treated as retained
+  const defRate   = shortList > 0 ? (retained / shortList * 100).toFixed(1) : 0;
+
+  // Tech support count
+  const tsProjects = getFilteredTS(projects);
+  const tsCount    = tsProjects.length;
+  const salesList  = [...new Set(projects.map(p => p.sales))];
+  const tsPerPerson = salesList.length > 0 ? (tsCount / salesList.length).toFixed(1) : 0;
+
+  return { active, bomLocked, diir, dibl, mpRate, avgRev, defRate, tsCount, tsPerPerson };
+}
+
+function renderKPIs(kpis) {
+  const fmt = v => v >= 1e8 ? (v/1e8).toFixed(1)+"억" : v >= 1e4 ? (v/1e4).toFixed(0)+"만" : v;
+  const cards = [
+    { label:"Active Design 수",   value: kpis.active,         sub:"현재 진행 프로젝트",       cls:"accent"  },
+    { label:"BOM Lock 수",        value: kpis.bomLocked,       sub:"BOM Lock + MP",             cls:"green"   },
+    { label:"DIIR",               value: kpis.diir+"%",        sub:"BOM Lock / Active",         cls:"accent"  },
+    { label:"평균 DIBL",          value: kpis.dibl+(kpis.dibl!=="-"?"일":""), sub:"Spec In → BOM Lock", cls:"yellow" },
+    { label:"양산전환율",          value: kpis.mpRate+"%",      sub:"MP / BOM Lock",             cls:"green"   },
+    { label:"평균 예상연매출",     value: fmt(Math.round(kpis.avgRev)), sub:"Design Win 기준",   cls:"orange"  },
+    { label:"경쟁전환 방지율",     value: kpis.defRate+"%",     sub:"Short List 이후",           cls:"purple"  },
+    { label:"기술지원 건수",       value: kpis.tsCount,         sub: `인당 ${kpis.tsPerPerson}건`, cls:"accent" },
+  ];
+  const grid = document.getElementById("kpi-grid");
+  grid.innerHTML = cards.map(c => `
+    <div class="kpi-card ${c.cls}">
+      <div class="label">${c.label}</div>
+      <div class="value">${c.value}</div>
+      <div class="sub">${c.sub}</div>
+    </div>`).join("");
+}
+
+// ─── Funnel ───
+function renderFunnel(projects) {
+  const counts = {};
+  STAGES_ORDER.forEach(s => counts[s] = 0);
+  projects.forEach(p => { if (counts[p.stage] !== undefined) counts[p.stage]++; });
+  const max = Math.max(...Object.values(counts), 1);
+  const total = projects.length;
+
+  document.getElementById("funnel-badge").textContent = total + "건";
+
+  const wrap = document.getElementById("funnel-wrap");
+  wrap.innerHTML = STAGES_ORDER.map((stage, i) => {
+    const cnt = counts[stage];
+    const pct = Math.max((cnt / max) * 100, 2);
+    const prev = i > 0 ? counts[STAGES_ORDER[i-1]] : cnt;
+    const conv = prev > 0 ? (cnt / prev * 100).toFixed(0) + "%" : "-";
+    return `
+    <div class="funnel-row">
+      <div class="funnel-label">${stage}</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="width:${pct}%;background:${STAGE_COLORS[stage] || "var(--accent)"}">
+          ${cnt > 0 ? cnt+"건" : ""}
+        </div>
+      </div>
+      <div class="funnel-meta">
+        ${cnt > 0 ? `<span class="funnel-conv">→${conv}</span>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ─── Dwell time chart ───
+function renderDwellChart() {
+  const stagesWithHistory = ["Spec In","Short List","EVT","DVT","PVT","BOM Lock"];
+  const avg = stagesWithHistory.map(s => {
+    const rows = STAGE_HISTORY.filter(h => h.stage === s && h.days != null);
+    return rows.length > 0 ? Math.round(rows.reduce((a,b) => a + b.days, 0) / rows.length) : 0;
+  });
+  const ctx = document.getElementById("chart-dwell").getContext("2d");
+  if (chartDwell) chartDwell.destroy();
+  chartDwell = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: stagesWithHistory,
+      datasets: [{ label:"평균 체류(일)", data: avg,
+        backgroundColor: stagesWithHistory.map(s => STAGE_COLORS[s] || "#4f8ef7"),
+        borderRadius: 5 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "#7c8299", font: { size: 11 } }, grid: { color: "#2e3150" } },
+        y: { ticks: { color: "#7c8299", font: { size: 11 } }, grid: { color: "#2e3150" } }
+      }
+    }
+  });
+}
+
+// ─── Customer table ───
+function renderCustomerTable(projects) {
+  const byCustomer = {};
+  projects.forEach(p => {
+    if (!byCustomer[p.customer]) byCustomer[p.customer] = { active:0, bom:0, rev:0, risks:[], comps:[] };
+    byCustomer[p.customer].active++;
+    if (["BOM Lock","MP"].includes(p.stage)) byCustomer[p.customer].bom++;
+    byCustomer[p.customer].rev += p.expectedRevenue || 0;
+    if (p.risk && p.risk !== "없음") byCustomer[p.customer].risks.push(p.risk);
+    if (p.competitor) byCustomer[p.customer].comps.push(p.competitor);
+  });
+  const fmt = v => v >= 1e8 ? (v/1e8).toFixed(1)+"억" : v >= 1e4 ? Math.round(v/1e4)+"만" : v;
+  const tbody = document.querySelector("#tbl-customer tbody");
+  tbody.innerHTML = Object.entries(byCustomer).sort((a,b) => b[1].rev-a[1].rev).map(([name,d]) => {
+    const uniqRisk = [...new Set(d.risks)].slice(0,2).join(", ") || "-";
+    const uniqComp = [...new Set(d.comps)].slice(0,2).join(", ");
+    return `<tr>
+      <td><strong>${name}</strong></td>
+      <td>${d.active}</td>
+      <td><span class="chip chip-green">${d.bom}</span></td>
+      <td>${fmt(d.rev)}</td>
+      <td style="color:var(--muted);font-size:.75rem">${uniqRisk}</td>
+      <td style="font-size:.75rem">${uniqComp}</td>
+    </tr>`;
+  }).join("");
+}
+
+// ─── Industry heatmap ───
+function renderHeatmap(projects) {
+  const byInd = {};
+  projects.forEach(p => {
+    if (!byInd[p.industry]) byInd[p.industry] = { count:0, bom:0, rev:0 };
+    byInd[p.industry].count++;
+    if (["BOM Lock","MP"].includes(p.stage)) byInd[p.industry].bom++;
+    byInd[p.industry].rev += p.expectedRevenue || 0;
+  });
+  const maxCount = Math.max(...Object.values(byInd).map(d => d.count), 1);
+  const IND_COLORS = { "가전":"#4f8ef7","산업용":"#3ecf8e","자동차":"#f79b48","통신":"#7c6af5","의료":"#f7c948" };
+  const fmt = v => v >= 1e8 ? (v/1e8).toFixed(1)+"억" : v >= 1e4 ? Math.round(v/1e4)+"만" : v;
+  const grid = document.getElementById("heatmap-grid");
+  grid.innerHTML = Object.entries(byInd).sort((a,b) => b[1].rev-a[1].rev).map(([ind,d]) => {
+    const alpha = 0.15 + 0.5 * (d.count / maxCount);
+    const color = IND_COLORS[ind] || "#4f8ef7";
+    const winRate = d.count > 0 ? (d.bom/d.count*100).toFixed(0) : 0;
+    return `<div class="hm-cell" style="background:${color}${Math.round(alpha*255).toString(16).padStart(2,'0')}; border:1px solid ${color}40;">
+      <div class="hm-ind">${ind}</div>
+      <div class="hm-val" style="color:${color}">${d.count}건</div>
+      <div class="hm-sub">승률 ${winRate}% | ${fmt(d.rev)}</div>
+    </div>`;
+  }).join("");
+}
+
+// ─── Tech Support bars ───
+function renderTechSupport(tsLogs) {
+  const types = {};
+  tsLogs.forEach(t => {
+    if (!types[t.type]) types[t.type] = { count:0, contrib:0 };
+    types[t.type].count++;
+    if (t.bomLockContrib) types[t.type].contrib++;
+  });
+  const max = Math.max(...Object.values(types).map(d => d.count), 1);
+  const TS_COLORS = {
+    "회로 리뷰":     "#4f8ef7",
+    "대체품 제안":   "#7c6af5",
+    "FW 지원":       "#3ecf8e",
+    "EMI/EMC 대응":  "#f7c948",
+    "열/전력 해석":  "#f79b48",
+    "샘플/EVB 지원": "#f76060",
+  };
+  const wrap = document.getElementById("ts-bars");
+  const sorted = Object.entries(types).sort((a,b) => b[1].count - a[1].count);
+  wrap.innerHTML = sorted.map(([type, d]) => {
+    const pct = (d.count / max * 100).toFixed(0);
+    const contribPct = d.count > 0 ? (d.contrib/d.count*100).toFixed(0) : 0;
+    const color = TS_COLORS[type] || "#4f8ef7";
+    return `<div class="ts-row">
+      <div class="ts-label">${type}</div>
+      <div class="ts-bar-wrap">
+        <div class="ts-bar" style="width:${pct}%;background:${color}">${d.count}건 (기여 ${contribPct}%)</div>
+      </div>
+      <div class="ts-count">${d.count}</div>
+    </div>`;
+  }).join("");
+
+  // Top 5 contrib chart
+  const top5 = sorted.slice(0,5);
+  const ctx = document.getElementById("chart-ts-contrib").getContext("2d");
+  if (chartTsContrib) chartTsContrib.destroy();
+  chartTsContrib = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: top5.map(([t]) => t),
+      datasets: [{
+        data: top5.map(([,d]) => d.contrib),
+        backgroundColor: top5.map(([t]) => TS_COLORS[t] || "#4f8ef7"),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position:"right", labels: { color:"#7c8299", font:{size:11}, padding:10 } }
+      }
+    }
+  });
+}
+
+// ─── Competition ───
+function renderCompetition() {
+  const comps = {};
+  WIN_LOSS.forEach(w => {
+    const c = w.competitor;
+    if (!c) return;
+    if (!comps[c]) comps[c] = { win:0, loss:0, total:0 };
+    comps[c].total++;
+    if (w.result === "Win") comps[c].win++;
+    else if (w.result === "Loss") comps[c].loss++;
+  });
+
+  const grid = document.getElementById("comp-grid");
+  grid.innerHTML = Object.entries(comps).sort((a,b) => b[1].total-a[1].total).map(([name,d]) => {
+    const wr = d.total > 0 ? (d.win/d.total*100).toFixed(0) : 0;
+    const color = wr >= 60 ? "var(--green)" : wr >= 40 ? "var(--yellow)" : "var(--red)";
+    return `<div class="comp-card">
+      <div class="name">${name}</div>
+      <div class="stats"><span>W ${d.win}</span><span>L ${d.loss}</span><span>총 ${d.total}</span></div>
+      <div class="win-rate" style="color:${color}">${wr}%</div>
+      <div class="loss-bar-wrap"><div class="win-fill" style="width:${wr}%;background:${color}"></div></div>
+    </div>`;
+  }).join("");
+
+  // Win/Loss reason doughnut
+  const reasons = {};
+  WIN_LOSS.forEach(w => {
+    const r = w.reasonMain || "기타";
+    reasons[r] = (reasons[r] || 0) + 1;
+  });
+  const ctx = document.getElementById("chart-winloss").getContext("2d");
+  if (chartWinloss) chartWinloss.destroy();
+  chartWinloss = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: Object.keys(reasons),
+      datasets: [{
+        data: Object.values(reasons),
+        backgroundColor: ["#4f8ef7","#3ecf8e","#f7c948","#f79b48","#f76060","#7c6af5"],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position:"right", labels: { color:"#7c8299", font:{size:11}, padding:10 } }
+      }
+    }
+  });
+}
+
+// ─── Risk board ───
+function renderRiskBoard() {
+  const typeCounts = {};
+  RISK_ISSUES.forEach(r => { typeCounts[r.type] = (typeCounts[r.type]||0)+1; });
+
+  const ctx = document.getElementById("chart-risk").getContext("2d");
+  if (chartRisk) chartRisk.destroy();
+  chartRisk = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: Object.keys(typeCounts),
+      datasets: [{
+        label: "건수",
+        data: Object.values(typeCounts),
+        backgroundColor: ["#f76060","#f7c948","#f79b48","#7c6af5","#4f8ef7"],
+        borderRadius: 5
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display:false } },
+      scales: {
+        x: { ticks: { color:"#7c8299", font:{size:11} }, grid: { color:"#2e3150" } },
+        y: { ticks: { color:"#7c8299", font:{size:11} }, grid: { display:false } }
+      }
+    }
+  });
+
+  const sorted = [...RISK_ISSUES].sort((a,b) => (a.priority==="High"?0:1)-(b.priority==="High"?0:1));
+  const list = document.getElementById("risk-list");
+  list.innerHTML = sorted.map(r => {
+    const prioClass = r.priority === "High" ? "prio-high" : "prio-medium";
+    const chipClass = r.priority === "High" ? "chip-red" : "chip-yellow";
+    return `<div class="risk-row ${prioClass}">
+      <div class="risk-left">
+        <div class="risk-title">
+          <span class="chip ${chipClass}">${r.type}</span>
+          <span style="margin-left:6px;font-size:.8rem">${r.projectId}</span>
+        </div>
+        <div class="risk-detail">${r.detail}</div>
+        <div class="risk-meta">오너: ${r.owner} | Due: ${r.dueDate}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ─── Executive Summary ───
+function renderExecSummary(projects, kpis) {
+  const tsLogs = getFilteredTS(projects);
+  // Top tech support type by bom contrib
+  const typeBomContrib = {};
+  tsLogs.filter(t => t.bomLockContrib).forEach(t => { typeBomContrib[t.type] = (typeBomContrib[t.type]||0)+1; });
+  const topTsType = Object.entries(typeBomContrib).sort((a,b)=>b[1]-a[1])[0];
+
+  // Industry with most projects
+  const indCounts = {};
+  projects.forEach(p => { indCounts[p.industry] = (indCounts[p.industry]||0)+1; });
+  const topInd = Object.entries(indCounts).sort((a,b)=>b[1]-a[1])[0];
+
+  // Best competitor win rate
+  const comps = {};
+  WIN_LOSS.forEach(w => {
+    if (!comps[w.competitor]) comps[w.competitor] = {win:0,total:0};
+    comps[w.competitor].total++;
+    if (w.result==="Win") comps[w.competitor].win++;
+  });
+  const bestComp = Object.entries(comps).sort((a,b)=>(b[1].win/b[1].total)-(a[1].win/a[1].total))[0];
+  const bestWR   = bestComp ? (bestComp[1].win/bestComp[1].total*100).toFixed(0) : "-";
+
+  const today = new Date().toLocaleDateString("ko-KR",{year:"numeric",month:"short"});
+  const bullets = [
+    `${today} 기준 Active Design <strong>${kpis.active}건</strong>, BOM Lock <strong>${kpis.bomLocked}건</strong>, DIIR <strong>${kpis.diir}%</strong>`,
+    topTsType ? `기술지원 중 <strong>${topTsType[0]}</strong>이(가) BOM Lock 기여 1위 (${topTsType[1]}건)` : "",
+    topInd ? `<strong>${topInd[0]}</strong> 산업군이 파이프라인 비중 최다 (${topInd[1]}건)` : "",
+    bestComp ? `경쟁사 <strong>${bestComp[0]}</strong>와의 맞대결 승률 <strong>${bestWR}%</strong>` : "",
+    `리스크 이슈 총 <strong>${RISK_ISSUES.length}건</strong> (High: <strong>${RISK_ISSUES.filter(r=>r.priority==="High").length}건</strong>)`,
+  ].filter(Boolean);
+
+  document.getElementById("exec-bullets").innerHTML = bullets.map(b => `<li>${b}</li>`).join("");
+}
+
+// ═══ MAIN RENDER ═══
+function render() {
+  const projects = getFilteredProjects();
+  const kpis     = calcKPIs(projects);
+  const tsLogs   = getFilteredTS(projects);
+
+  renderKPIs(kpis);
+  renderFunnel(projects);
+  renderDwellChart();
+  renderCustomerTable(projects);
+  renderHeatmap(projects);
+  renderTechSupport(tsLogs);
+  renderCompetition();
+  renderRiskBoard();
+  renderExecSummary(projects, kpis);
+}
+
+// ═══ INIT ═══
+document.addEventListener("DOMContentLoaded", () => {
+  const now = new Date();
+  document.getElementById("updatedAt").textContent =
+    "최종 업데이트: " + now.toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric"});
+  populateFilters();
+  render();
+});
+</script>
+</body>
+</html>
