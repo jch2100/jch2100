@@ -320,16 +320,47 @@ mark.var {
 
 ---
 
-### 5-5. 100-sales-prompts.md 파일 문제 기록
+### 5-5. 100-sales-prompts.md 파일 복구 완료 (2026-03-22)
 
-현재 `100-sales-prompts.md`는 **JSONL 형식으로 잘못 저장**됨.
-대화 기록(conversation history)이 마크다운 파일로 저장된 상태.
-실제 프롬프트 콘텐츠는 JSON 내부에 있음 — 별도 추출 작업 필요.
+**조치 완료:**
+- [x] JSONL에서 Python 파싱으로 36개 프롬프트 텍스트 추출
+- [x] prompt-writing.md 규칙 준수 형식으로 전체 재작성 (#101~#136)
+- [x] 각 프롬프트에 논문 근거(근거), 역할, 난이도, 키워드, 강사 팁 추가
+- [x] #150번대 기존 고객관리 카테고리 신설 (#151~#158, 총 8개)
+- **현재 총 44개 프롬프트** (목표 40개 초과)
 
-**다음 세션 조치 필요:**
-- [ ] JSON 파싱으로 실제 프롬프트 텍스트 추출
-- [ ] 올바른 마크다운 형식(프롬프트-writing.md 규칙)으로 재작성
-- [ ] #150번대 기존 고객관리 카테고리 신설 추가
+---
+
+### 5-6. QBR & Customer Success 심화 리서치 (2026-03-22)
+
+#### QBR 연구 핵심 발견 (Gainsight + myclientshare 2024)
+
+| 데이터 | 출처 |
+|--------|------|
+| QBR에서 충분한 가치/혁신을 보여주지 않는다 — **88%의 구매자** | myclientshare QBR Research 2024 |
+| 공급사가 최소한만 하고 있다고 느낀다 — **60%** | myclientshare 2024 |
+| 공급사가 충분한 가치를 보여주지 않아 계약 해지 — **82%** | myclientshare 2024 |
+| QBR이 단순 현황 보고로 느껴진다 — CSM의 **72%** | Churnbuster Benchmark 2024 |
+| SaaS 확장 매출의 **72%**가 기존 고객에서 발생 | Gainsight Research |
+| McKinsey: 임원 참여 고객이 갱신 가능성 **2.5배** | McKinsey & Company |
+
+**QBR 최적 아젠다 6요소:** ① 비즈니스 목표 확인 → ② 성과 지표 → ③ 성취·과제 → ④ 고객 피드백 → ⑤ ROI 증명 → ⑥ 액션 아이템
+
+**실패하는 QBR의 공통점:** 상태 보고 → 우리가 잘했다 자랑 → 영업 피칭
+
+#### Churn Prediction 핵심 발견 (2024 B2B SaaS 연구)
+
+| 데이터 | 의미 |
+|--------|------|
+| B2B SaaS 평균 Churn: **4.2%** (2024) | 기업 규모별 차이 — 소기업 7.5%, 대기업 3.8% |
+| 의사결정자 이직 시 이탈률 **25%** vs 재직 시 **8%** | Champion Risk의 정량적 증거 |
+| 첫 90일 내 핵심 기능 미도입 → 이탈 가능성 **40% 증가** | Onboarding의 중요성 |
+| B2B SaaS 기업 46%가 Churn Prediction 모델 도입 중 | 시장 트렌드 |
+
+**이탈 조기 경보 신호 (선행 지표):**
+로그인 빈도 감소 / 핵심 기능 미사용 / 지원 티켓 급증 / 결제 지연 / 담당자 응답 지연 / QBR 반복 취소 / 경쟁사 벤치마킹 요청
+
+**출처:** Gainsight Essential Guide to QBR, myclientshare QBR Research 2024, Vitally SaaS Churn Benchmarks, PMC/Churnfree 연구
 
 ---
 
@@ -338,7 +369,7 @@ mark.var {
 | 파일 | 내용 |
 |------|------|
 | `000-core-principles.md` | 총류 원칙 + 프레임워크 비교 |
-| `100-sales-prompts.md` | 영업 프롬프트 36개 |
-| `100-sales-keywords.md` | **영업 도메인 키워드 사전** (신규, 2026-03-22) |
+| `100-sales-prompts.md` | **영업 프롬프트 44개** (#101~#136 + #151~#158) — 2026-03-22 전면 재작성 |
+| `100-sales-keywords.md` | 영업 키워드 사전 (신규 발굴 + **기존 고객관리 키워드 추가**) |
 | `200-400-500-prompts.md` | 재무(15) + 스마트워크(20) + 경영전략(21) |
 | `book2/references.md` | 에세이 책 참고자료 (도서/논문/콘텐츠) |

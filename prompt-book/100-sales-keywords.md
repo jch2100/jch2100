@@ -205,12 +205,71 @@ MBA 영업 과목의 기본. 제품 설명을 고객 가치로 연결하는 구�
 
 ---
 
-## 7. 리서치 추가 필요 항목
+## 7. 기존 고객 관리 & 볼륨업 키워드 (신설, 2026-03-22)
+
+> #151~#158 프롬프트 작성을 위해 신설. 찬훈님 현장 관찰 기반.
+
+### KAM (Key Account Management) 핵심 용어
+
+| 용어 | 정의 |
+|------|------|
+| **KAM** (Key Account Management) | 핵심 고객사를 전략적으로 관리·성장시키는 체계. 단순 영업이 아닌 파트너십 관리 |
+| **Whitespace Mapping** | 기존 계정 내 미개척 수요 영역을 시각화하는 방법. 어느 부서·제품에 기회가 있는지 파악 |
+| **Account Health Score** | 계정의 건강도를 수치화한 지표. 제품 사용률, 참여도, NPS, 결제 이력 등 복합 지표 |
+| **Expansion Revenue** | 기존 고객으로부터 발생하는 추가 매출 (Upsell + Cross-sell) |
+| **NRR** (Net Revenue Retention) | 기존 고객 매출 유지율. 100% 이상이면 해지보다 확장이 많음. SaaS 핵심 지표 |
+| **GRR** (Gross Revenue Retention) | 확장 제외 순수 유지율. 이탈 측정의 가장 순수한 지표 |
+| **Churn Rate** | 기간 내 이탈 고객 비율. B2B SaaS 평균 4.2% (2024) |
+| **Champion** | 고객사 내 우리 제품의 내부 지지자. 의사결정 구조를 알려주고 도입을 도움 |
+| **Champion Risk** | 챔피언이 이직·이동할 경우 계정 전체를 잃을 위험 |
+| **Economic Buyer** | 최종 예산 집행 결정권자. Champion과 다른 사람일 수 있음 |
+| **Multi-threading** | 고객사 내 여러 부서·담당자와 동시에 관계를 구축하는 전략 (챔피언 단일화 리스크 방지) |
+| **Stakeholder Map** | 고객사 의사결정 관여자 전체를 시각화한 지도 |
+
+---
+
+### Customer Success & Churn Prevention 핵심 용어
+
+| 용어 | 정의 |
+|------|------|
+| **CSM** (Customer Success Manager) | 계약 후 고객이 제품에서 가치를 얻도록 관리하는 담당자 |
+| **QBR** (Quarterly Business Review) | 분기별 전략 미팅. 성과 확인 + 다음 분기 목표 합의. 갱신율에 직결 |
+| **EBR** (Executive Business Review) | QBR의 임원 버전. 최소 반기 1회. 임원 참여 고객 갱신율 2.5배 (McKinsey) |
+| **Onboarding** | 신규 고객이 제품 가치를 경험하는 초기 90일 프로세스 |
+| **Time-to-Value** | 고객이 처음 실질적 가치를 경험하기까지의 시간. 짧을수록 이탈률 낮음 |
+| **Customer Health Score** | 제품 사용률, 로그인 빈도, 지원 티켓, NPS 등을 종합한 이탈 위험 예측 지표 |
+| **Leading Indicator** | 이탈을 예측하는 선행 지표. 로그인 감소, 기능 미사용, 결제 지연 등 |
+| **Lagging Indicator** | 이탈이 이미 발생한 후 확인되는 후행 지표. 해지 통보, NPS 급하락 등 |
+| **At-Risk Account** | 이탈 위험이 높다고 판단된 계정 |
+| **Renewal** | 계약 갱신. B2B SaaS에서 가장 중요한 영업 이벤트 |
+| **Expansion** | 기존 계약 범위를 초과하는 추가 판매 (Upsell + Cross-sell 포함) |
+| **Logo Retention** | 계정 수 기준 유지율 (금액과 무관하게 고객사 수로 측정) |
+| **Playbook** | 특정 상황에서 실행할 표준 대응 방식 (예: 챔피언 교체 플레이북) |
+
+---
+
+### 이탈 조기 경보 신호 (B2B SaaS Research 2024 기반)
+
+| 신호 | 위험도 |
+|------|--------|
+| 로그인 빈도 30% 이상 감소 | 높음 |
+| 핵심 기능 미사용 90일 이상 | 높음 |
+| 지원 티켓 급증 | 중간 |
+| 결제 지연 2회 이상 | 높음 |
+| 의사결정자 이직 | 매우 높음 (이탈률 25% vs 재직 8%) |
+| QBR 취소 또는 연기 반복 | 중간 |
+| 담당자 응답 지연 3주 이상 | 중간 |
+| RFP 발송 또는 경쟁사 벤치마킹 요청 | 매우 높음 |
+
+---
+
+## 8. 리서치 추가 필요 항목
 
 - [ ] SNAP Selling (Jill Konrath) — 바쁜 구매자 대상 간소화 방법론
 - [ ] GAP Selling (Keenan) — 현재 상태 vs 이상 상태 갭 분석
 - [ ] Solution Selling (Michael Bosworth) — 문제 해결 중심
 - [ ] NEAT Selling — BANT의 현대적 대체
 - [ ] Account-Based Marketing (ABM)과 영업 연계
-- [ ] 무패영업 BANTCH 원전 확인 (강민호 저서 직접 참조 필요)
+- [x] 무패영업 저자 정정 완료 — 高橋浩一(다카하시 고이치), TORiX 대표 (2026-03-22)
 - [ ] SaaS 특화 영업 지표 심화 (PLG, Product-Led Growth)
+- [ ] Customer Success 전문 방법론 (Gainsight CS 프레임워크)
