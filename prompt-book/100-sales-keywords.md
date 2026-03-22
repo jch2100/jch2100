@@ -263,13 +263,65 @@ MBA 영업 과목의 기본. 제품 설명을 고객 가치로 연결하는 구�
 
 ---
 
-## 8. 리서치 추가 필요 항목
+## 8. 한국 B2B 영업 조직 구조 & 운영 키워드 (신설, 2026-03-22)
+
+> 딥리서치 기반 — 한국 시장 특화 용어 + 글로벌 SaaS 세일즈 조직 표준
+
+### 영업 조직 분업 체계 (더 모델 / The Model)
+
+| 용어 | 정의 |
+|------|------|
+| **The Model (더 모델)** | Marketo → Salesforce가 체계화한 영업 분업 구조. Marketing → SDR → AE → CSM의 역할 분화 |
+| **RevOps** (Revenue Operations) | 마케팅·영업·CS를 하나의 수익 파이프라인으로 통합 운영하는 조직 또는 기능 |
+| **SDR** (Sales Development Rep) | 아웃바운드 리드 발굴·자격검증 전담. SQL 만들어 AE에게 넘김 |
+| **BDR** (Business Development Rep) | 신규 시장·파트너 개척 담당. SDR과 유사하나 더 전략적 |
+| **AE** (Account Executive) | SQL → 클로징 담당 영업. 딜 오너 |
+| **CSM** (Customer Success Manager) | 계약 후 고객 성공 관리. 갱신·확장 리드 |
+| **SE** (Sales Engineer) | 기술 영업 지원. 데모·PoC·기술 문서 담당 |
+| **ABM** (Account-Based Marketing) | 특정 전략 계정을 마케팅·영업이 함께 집중 공략하는 방식. 대기업 영업에 특히 효과적 |
+| **PLG** (Product-Led Growth) | 제품 자체가 영업 채널. 무료 체험→자연 전환. Slack, Zoom, Notion 방식 |
+| **PLS** (Product-Led Sales) | PLG + 영업팀 결합. 제품 사용 데이터로 영업 타이밍 포착 |
+
+---
+
+### 영업 성과 지표 (한국 B2B 벤치마크 포함)
+
+| 지표 | 정의 | 한국 벤치마크 |
+|------|------|------------|
+| **Win Rate** | 기회(Opportunity) 대비 성약 비율 | IT/SaaS 20~22%, 제조 19%, 금융 18% |
+| **Sales Cycle** | 첫 접촉→계약 평균 소요일 | 스타트업 고객 38일, 대기업 185일+ |
+| **Pipeline Coverage** | 목표 대비 파이프라인 규모 비율 | 적정 수준: **3.5~5x** |
+| **ACV** (Annual Contract Value) | 연간 계약 금액 | IT/SaaS AE 목표 쿼터: $800K(약 10.4억) |
+| **ARR** (Annual Recurring Revenue) | 연간 반복 매출 합계 | SaaS 핵심 지표 |
+| **MRR** (Monthly Recurring Revenue) | 월간 반복 매출 | ARR ÷ 12 |
+| **Quota Attainment** | 쿼터 달성률 | 전체 AE의 **30%**만 달성 (2024) |
+| **Lead-to-Customer Conversion** | 리드 전체 전환율 | **1~5%** |
+| **Inbound vs Outbound** | 인바운드 리드 전환율이 아웃바운드의 **8.6배** | — |
+
+---
+
+### 한국 B2B 영업 특수 용어
+
+| 용어 | 의미 |
+|------|------|
+| **CSAP** | 클라우드 보안인증제. 공공기관 대상 SaaS는 필수 |
+| **나라장터** | 공공기관 조달 플랫폼. 정부·공공 B2B 영업의 핵심 채널 |
+| **약심위** | 병원 약품집 등재 심의위원회. 제약 영업의 핵심 관문 |
+| **PPAP** | 양산승인절차. 반도체/자동차 부품 납품 필수 프로세스 |
+| **RFI → RFP → RFQ** | 정보요청서 → 제안요청서 → 견적요청서. 대기업 조달 정식 절차 |
+| **VRB** (가치검토위원회) | B2B 복잡 딜에서 고객 내부 의사결정 기구. 4~5회 대응 필요 |
+| **파이프라인 역설** | 파이프라인 양 23% 증가, 승률 18% 하락 현상 (Ebsta 2024) |
+| **MZ 구매자** | MZ세대가 기업 구매 담당자의 64% 차지. 디지털 셀프서비스 선호 |
+
+---
+
+## 9. 리서치 추가 필요 항목
 
 - [ ] SNAP Selling (Jill Konrath) — 바쁜 구매자 대상 간소화 방법론
 - [ ] GAP Selling (Keenan) — 현재 상태 vs 이상 상태 갭 분석
 - [ ] Solution Selling (Michael Bosworth) — 문제 해결 중심
 - [ ] NEAT Selling — BANT의 현대적 대체
-- [ ] Account-Based Marketing (ABM)과 영업 연계
+- [x] ABM (Account-Based Marketing) — 키워드 추가 완료 (2026-03-22)
 - [x] 무패영업 저자 정정 완료 — 高橋浩一(다카하시 고이치), TORiX 대표 (2026-03-22)
-- [ ] SaaS 특화 영업 지표 심화 (PLG, Product-Led Growth)
+- [x] PLG/PLS — Product-Led Growth/Sales 키워드 추가 완료 (2026-03-22)
 - [ ] Customer Success 전문 방법론 (Gainsight CS 프레임워크)
