@@ -74,7 +74,149 @@
 
 ---
 
-## 4. 상세 리서치 파일 위치
+## 4. HTML 라이브러리 기술 구현 리서치 (2026-03-22)
+
+### 핵심 결론 먼저
+
+단일 HTML 파일로 오프라인 동작하는 프롬프트 라이브러리는 충분히 가능하다.
+기술 난이도보다 JSON 데이터 설계가 더 중요하다.
+
+---
+
+### 4-1. CSS 전략
+
+**결정: Tailwind CDN 사용하지 않는다.**
+
+Tailwind v4 CDN은 공식적으로 "개발/프로토타입 전용"이며 프로덕션 비권장.
+단일 HTML 파일을 오프라인에서 사용하려면 CDN 의존성이 없어야 한다.
+
+**대안 3가지:**
+
+| 방법 | 장점 | 단점 | 적합도 |
+|------|------|------|--------|
+| 수동 CSS (`<style>` 태그) | 완전 제어, 의존성 없음 | 처음 작성 시간 필요 | 최적 |
+| Tailwind Play → CSS 추출 → 임베드 | Tailwind 문법 사용 가능 | 일회성 작업, 수정마다 재추출 | 보통 |
+| Pure CSS (경량 프레임워크) | 빌드 불필요, 가벼움 | 유틸리티 클래스 없음 | 보통 |
+
+**권장:** 수동 CSS. 아이보리 팔레트 + 카드 스타일 + 사이드바, 총 CSS 200줄 이내로 충분.
+
+---
+
+### 4-2. 데이터 구조 전략
+
+**결정: JSON을 `<script>` 태그 안에 인라인으로 임베드**
+
+`fetch()`로 외부 JSON을 불러오는 방식은 `file://` 프로토콜(로컬 파일)에서 CORS 오류 발생.
+오프라인 + 단일 파일 = 인라인 JSON이 유일한 선택.
+
+```js
+// HTML 내부 <script> 태그에 직접 선언
+const PROMPTS = [
+  {
+    id: "101",
+    title: "초기 접촉 이메일",
+    domain: "100",
+    role: "B2B 영업 전문가",
+    difficulty: "초급",
+    keywords: ["CRM", "파이프라인", "BANT"],
+    source: "Wharton 2024",
+    body: "당신은 {산업} 분야의 B2B 영업 전문가입니다...",
+    tip: "BANT 변수를 먼저 채운 뒤 실행하세요."
+  },
+  // ...
+];
+```
+
+**데이터가 많아질 때 대비:** 프롬프트 200개 기준 JSON 약 100~150KB — 브라우저에서 문제없음.
+
+---
+
+### 4-3. 검색/필터 구현
+
+서버 없이 완전 클라이언트 사이드로 동작. 구현 난이도 낮음.
+
+```js
+// 핵심 로직 (10줄 이내)
+input.addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  const filtered = PROMPTS.filter(p =>
+    p.title.includes(term) ||
+    p.keywords.some(k => k.toLowerCase().includes(term)) ||
+    p.domain === activeDomain
+  );
+  renderCards(filtered);
+});
+```
+
+---
+
+### 4-4. 복사 버튼
+
+`navigator.clipboard.writeText()` — 2025년 현재 모든 현대 브라우저 지원.
+
+주의: HTTPS 또는 localhost에서만 동작. 로컬 `file://`에서는 작동 안 할 수 있음.
+→ 폴백 처리 필요 (`execCommand` 방식 병행).
+
+```js
+async function copyPrompt(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('복사했습니다');
+  } catch {
+    // 폴백: 텍스트 선택 후 복사
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('복사했습니다');
+  }
+}
+```
+
+---
+
+### 4-5. 변수 하이라이트
+
+프롬프트 본문의 `{산업}`, `{역할}` 같은 변수를 시각적으로 구분.
+
+```js
+function highlightVariables(text) {
+  return text.replace(/\{([^}]+)\}/g,
+    '<mark class="var">$&</mark>'
+  );
+}
+```
+
+CSS:
+```css
+mark.var {
+  background: #EDE9E0;
+  color: #5C5C5C;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+```
+
+---
+
+### 4-6. 구현 순서 (권장)
+
+1. HTML 껍데기 + 수동 CSS (색상 시스템 구현)
+2. JSON 데이터 구조 확정 + 더미 데이터 5개
+3. 카드 렌더링 (JS로 DOM 생성)
+4. 사이드바 카테고리 필터
+5. 검색
+6. 복사 버튼 + 변수 하이라이트
+7. 모바일 반응형
+
+**각 단계가 독립적으로 작동함. 한 세션에 1~2단계씩 진행 가능.**
+
+---
+
+## 5. 상세 리서치 파일 위치
 
 | 파일 | 내용 |
 |------|------|
