@@ -315,7 +315,48 @@ MBA 영업 과목의 기본. 제품 설명을 고객 가치로 연결하는 구�
 
 ---
 
-## 9. 리서치 추가 필요 항목
+## 9. SPIN Selling 심화 + 채널 관리 키워드 (2026-03-22 추가)
+
+### SPIN Selling 심화 개념
+
+| 용어 | 정의 |
+|------|------|
+| **Implied Need** | 고객이 암묵적으로 느끼는 불편/문제 (아직 명확히 표현 안 됨) |
+| **Explicit Need** | 고객이 명확히 표현한 요구 ("우리는 X가 필요합니다") |
+| **Objection Prevention** | 이의제기를 처리하는 것이 아닌 SPIN 질문으로 사전에 방지 |
+| **Objection Handling** | 발생한 이의제기를 논리로 극복 — 소형 세일즈에서 유효, 대형에선 역효과 |
+| **Benefit** | 고객이 말한 Explicit Need를 해결해준다고 연결된 주장 (이의제기 ↓) |
+| **Advantage** | 제품 특장점 설명 — 니즈 연결 없이 제시 시 이의제기 ↑ |
+| **DMU** (Decision Making Unit) | 구매에 관여하는 모든 이해관계자 집합 |
+| **Implication Question** | 문제의 파급효과를 고객이 스스로 말하게 하는 질문 — SPIN의 핵심 |
+| **Need-Payoff Question** | 해결 시 가치를 고객이 직접 표현하게 하는 질문 |
+| **Situation Question** | 현재 상황 파악용 — 최소화해야 함 (고객 피로도 높음) |
+| **Problem Question** | 문제/불편 발굴 — 고객이 미처 인식 못한 문제 드러내기 |
+
+### 채널 관리 (Channel Management) 키워드
+
+| 용어 | 정의 |
+|------|------|
+| **직판** (Direct Sales) | 제조사/공급사가 최종 고객에게 직접 영업 |
+| **간접 채널** (Indirect Channel) | 총판·대리점·리셀러를 통한 영업 |
+| **Channel Conflict** | 직판과 채널 파트너 간, 또는 채널 파트너 간 이해 충돌 |
+| **Rules of Engagement** | 직판·채널 간 역할/고객/가격 규칙을 명문화한 문서 |
+| **Deal Registration** | 파트너가 특정 딜을 먼저 등록해 우선권을 보호받는 시스템 |
+| **Price Protection** | 제조사가 채널보다 낮은 가격으로 직판 금지하는 정책 |
+| **MDF** (Market Development Fund) | 채널 파트너의 마케팅 활동을 지원하는 공동 펀드 |
+| **Partner Enablement** | 채널 파트너가 효과적으로 영업할 수 있도록 교육/자료/도구 제공 |
+| **총판** (Master Distributor) | 제조사↔대리점 중간 계층. 재고 보유, 신용 제공 |
+| **VAR** (Value Added Reseller) | 제품에 기술·서비스를 추가해 재판매하는 파트너 |
+| **Channel Tiering** | 파트너를 성과/역량 기준으로 Gold/Silver/Bronze 등 등급 구분 |
+| **Territory Management** | 채널별 지역/산업/고객 규모 독점 구역 설정 |
+| **Dual Channel** | 직판+간접 채널을 동시에 운영하는 구조 |
+| **Sales Process** | 영업 단계를 문서화한 프로세스 (발굴→자격→제안→협상→수주) |
+| **Exit Criteria** | 다음 영업 단계로 이동하기 위한 객관적 기준 |
+| **Pipeline Stage** | CRM에서 딜의 현재 위치를 나타내는 단계 |
+
+---
+
+## 10. 리서치 추가 필요 항목
 
 - [ ] SNAP Selling (Jill Konrath) — 바쁜 구매자 대상 간소화 방법론
 - [ ] GAP Selling (Keenan) — 현재 상태 vs 이상 상태 갭 분석
@@ -325,3 +366,5 @@ MBA 영업 과목의 기본. 제품 설명을 고객 가치로 연결하는 구�
 - [x] 무패영업 저자 정정 완료 — 高橋浩一(다카하시 고이치), TORiX 대표 (2026-03-22)
 - [x] PLG/PLS — Product-Led Growth/Sales 키워드 추가 완료 (2026-03-22)
 - [ ] Customer Success 전문 방법론 (Gainsight CS 프레임워크)
+- [x] SPIN Selling 심화 키워드 추가 완료 (2026-03-22)
+- [x] 채널 관리(Channel Management) 키워드 추가 완료 (2026-03-22)
