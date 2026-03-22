@@ -1391,7 +1391,7 @@ C - Champion: 내부 챔피언이 확보되었는가?
 ---
 
 ## #145 5단계 — SPIN 핵심 질문 은행 설계 (I+N 집중)
-**근거**: SPIN Selling (Rackham, 1988) — 탑 영업은 Implication·Need-payoff 질문을 평균 2.4배 더 많이 사용
+**근거**: SPIN Selling (Rackham, 1988) — 탑 영업은 Implication 질문을 평균 대비 4배 더 많이 사용 (Huthwaite 35,000건 연구)
 **역할**: SPIN 질문 설계 전문가
 **난이도**: 중급
 **키워드**: [SPIN] [Implication Question] [Need-Payoff Question] [Consultative Selling] [Value Creation]
