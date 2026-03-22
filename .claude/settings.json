@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '프로젝트: 프롬프트 북 (jch2100/prompt-book)\\n\\n주요 파일:\\n- prompt-book/plan.md (OKR 현황)\\n- prompt-book/research.md (리서치 통합)\\n- prompt-book/mockup.md (UI 구상)\\n- prompt-book/book2/notes.md (에세이 소재)\\n\\n사용 가능한 스킬:\\n/prompt-research [주제] — 논문·크리에이터 리서치\\n/prompt-review [파일] — 품질 검토\\n/book2-note [인사이트] — Book 2 소재 기록\\n\\n주의: push 전 토큰 확인 필요'"
+          }
+        ]
+      }
+    ]
+  }
+}
