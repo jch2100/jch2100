@@ -27,9 +27,7 @@
 - .claude/skills/ — 반복 작업 자동화 스킬
 
 ## GitHub
-- 저장소: jch2100/prompt-book (Private)
-- push 시 토큰 필요 (세션마다 요청)
-- push 후 반드시 토큰 포함 remote 삭제
+- 저장소: jch2100/jch2100 (Private)
 
 ## 소통 방식
 - 한국어로 대화
