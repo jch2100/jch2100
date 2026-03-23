@@ -34,3 +34,12 @@
 - 기술 용어는 쉽게 풀어서 설명
 - 과도한 세분화보다 OKR 방식 선호
 - 이모지 사용하지 않음
+
+## gstack
+- 웹 브라우징은 항상 /browse 스킬(gstack)을 사용한다. mcp__claude-in-chrome__* 도구는 절대 사용하지 않는다.
+- 사용 가능한 gstack 스킬 목록:
+  /office-hours, /plan-ceo-review, /plan-eng-review, /plan-design-review,
+  /design-consultation, /review, /ship, /land-and-deploy, /canary, /benchmark,
+  /browse, /qa, /qa-only, /design-review, /setup-browser-cookies, /setup-deploy,
+  /retro, /investigate, /document-release, /codex, /cso, /autoplan, /careful,
+  /freeze, /guard, /unfreeze, /gstack-upgrade
