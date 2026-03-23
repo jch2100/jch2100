@@ -1,7 +1,7 @@
 # 300번대 — 생성형AI 활용 프롬프트 라이브러리
-*작성일: 2026-03-22 | 검증 기준: 논문·실전 경험*
+*작성일: 2026-03-22 | 최종 업데이트: 2026-03-23 | 검증 기준: 논문·실전 경험*
 
-> **자료 출처**: 정찬훈 자체 연구 — "생성형 AI 프롬프트 최적화를 위한 범용 문제해결 도구 및 인지 프레임워크 총망라 보고서"
+> **자료 출처**: 정찬훈 자체 연구 + 나노바나나 이미지 가이드 + 2026 Gen AI 도구 리서치
 
 ---
 
@@ -192,5 +192,188 @@ MECE 원칙(상호 배타적, 전체 포괄적)에 따라 다음을 수행해주
 ---
 
 **강사 팁**: VUCA 환경에서 가장 흔한 실수는 복잡한 문제를 단순한 문제처럼 다루는 것입니다. "정답이 없는 문제"에 정답을 강요하면 조직이 경직됩니다. 먼저 문제 유형을 진단하는 이 프롬프트를 의사결정 전에 쓰세요.
+
+---
+
+## 카테고리 B: Gen AI 도구 선택 & 바이브코딩 (#307~#309)
+
+## #307 Gen AI 도구 지도 — 작업별 최적 도구 선택
+**근거**: 2026 Gen AI 도구 비교 리서치 (Cursor/Claude/Gemini/Midjourney 등 실사용 데이터)
+**역할**: 생성형AI 도구 큐레이터
+**난이도**: 초급
+**키워드**: [Gen AI 도구 선택] [ChatGPT] [Claude] [Gemini] [Cursor] [Midjourney]
+
+---
+내가 하려는 작업: [예: 강의 PPT 초안 만들기 / 코드 없이 앱 만들기 / 프로필 사진 생성]
+
+이 작업에 가장 적합한 AI 도구를 추천해줘. 아래 카테고리를 참고해서 답해줘:
+
+**텍스트·대화**: ChatGPT(생태계 최강) / Claude(장문·코딩) / Gemini(Google 연동) / Perplexity(실시간 검색)
+**코딩·바이브코딩**: Cursor(IDE) / Lovable(초보자 풀스택) / Bolt.new(빠른 프로토) / v0.dev(UI컴포넌트) / Claude Code(터미널)
+**이미지 생성**: Gemini 이미지(인물사진) / Midjourney(예술·화보) / Flux Pro(사진사실성) / Ideogram(텍스트 포함 이미지)
+**영상 생성**: Runway(산업표준) / Kling(소셜·길이) / Pika(스타일화)
+**프레젠테이션**: Gamma(슬라이드 자동생성)
+**문서 분석**: NotebookLM(PDF·논문)
+**음성**: ElevenLabs(다국어 TTS)
+
+다음 형식으로 답해줘:
+1. 1순위 추천 도구 + 이유 (1줄)
+2. 대안 도구 1개 + 차이점
+3. 주의사항 또는 조합 팁
+---
+
+**강사 팁**: "AI 뭐 써요?"라는 질문에 ChatGPT 하나로 대답하는 시대는 끝났습니다. 작업 유형에 따라 최적 도구가 다릅니다. 이 프롬프트를 ChatGPT나 Claude에게 던지면 현재 시점 기준 최신 추천을 받을 수 있습니다. 단, AI 도구 정보는 빠르게 바뀌므로 출시일도 함께 확인하세요.
+
+---
+
+## #308 바이브코딩 시작 — 코드 없이 첫 번째 앱 만들기
+**근거**: Vibe Coding 개념 (Andrej Karpathy, 2025년 제시 / Collins 사전 2025 올해의 단어) + Lovable·Bolt.new 실사용 패턴
+**역할**: 바이브코딩 가이드 (비개발자 전용)
+**난이도**: 초급
+**키워드**: [바이브코딩] [Vibe Coding] [Lovable] [Bolt.new] [노코드] [프로토타입]
+
+---
+나는 코딩을 모르는 비개발자입니다. 다음 앱/웹사이트를 만들고 싶습니다.
+
+만들고 싶은 것: [예: 강의 일정을 보여주는 심플한 랜딩 페이지 / 수강생 피드백을 받는 폼 / 포트폴리오 사이트]
+
+다음 순서로 안내해주세요:
+
+1. **도구 선택** — Lovable / Bolt.new / v0.dev 중 이 작업에 가장 적합한 것 1개와 이유
+2. **첫 번째 프롬프트** — 선택한 도구에 바로 붙여 넣을 수 있는 영어 시작 프롬프트 (구체적으로)
+3. **다음 수정 명령 3가지** — 결과물을 개선할 때 쓸 수 있는 후속 프롬프트 예시
+4. **주의사항** — 비개발자가 바이브코딩할 때 흔히 겪는 함정 2가지
+
+계획 단계에서는 코드를 쓰지 말고, 내가 이해할 수 있는 언어로만 설명해주세요.
+---
+
+**강사 팁**: 바이브코딩의 핵심은 "계획 중엔 실행하지 마라" 원칙과 동일합니다. 도구를 열기 전에 먼저 만들고 싶은 것을 한 문장으로 쓸 수 있어야 합니다. 그 문장이 프롬프트의 전부입니다.
+
+---
+
+## #309 이미지 AI 영문 프롬프트 제작 — 파파고 금지, LLM 활용
+**근거**: 이미지·영상 AI는 영어 데이터로 집중 훈련됨 (강수진 박사, Ti-Times) + 강사 현장 경험
+**역할**: 이미지 AI 프롬프트 전문가
+**난이도**: 초급
+**키워드**: [이미지 프롬프트] [영문 프롬프트] [Gemini 이미지] [Midjourney] [프롬프트 번역]
+
+---
+나는 다음 이미지를 만들고 싶습니다.
+
+사용할 도구: [예: Gemini 이미지(나노바나나 모드) / Midjourney / Flux Pro]
+원하는 이미지 내용: [예: 전문적인 비즈니스 강사 프로필 사진 / 회사 소개 배경 이미지]
+스타일: [예: 깔끔하고 신뢰감 있는 / 예술적이고 감성적인]
+용도: [예: 링크드인 프로필 / 강의 소개 페이지 / 유튜브 썸네일]
+
+위 내용을 바탕으로 [사용할 도구]에 최적화된 영문 프롬프트를 만들어줘.
+
+요구사항:
+- 단순 번역(파파고식)이 아닌, 해당 AI 도구의 프롬프트 문법과 스타일에 맞게 작성
+- 조명(lighting), 카메라 렌즈(lens), 분위기(mood), 배경(background) 등 핵심 파라미터 포함
+- 비율 지정이 필요하면 ar--1:1 또는 ar--4:5 형식으로 추가
+- 얼굴 유지가 필요하면 "Keep the face and pose as in reference." 문장 포함
+
+프롬프트와 함께, 수정하기 쉬운 변수 3가지(예: 배경색, 의상, 표정)를 표로 정리해줘.
+---
+
+**강사 팁**: 이미지 AI에 한국어나 파파고 번역문을 그대로 넣으면 결과가 어색합니다. 이미지·영상 AI는 LLM과 달리 번역 능력이 약하고, 영어 프롬프트로 훈련이 집중되어 있습니다. "내용을 한국어로 설명하고, LLM에게 해당 AI 도구에 맞는 영문 프롬프트를 만들어달라"고 하는 것이 가장 안정적입니다.
+
+---
+
+## 카테고리 C: 이미지 생성 AI 실전 (#310~#312)
+
+## #310 인물 프로필 사진 — 5가지 스타일 선택 가이드 (Gemini 이미지)
+**근거**: 나노바나나 Gemini 이미지 프롬프트 가이드 (실전 검증)
+**역할**: 퍼스널 브랜딩 이미지 디렉터
+**난이도**: 초급
+**키워드**: [Gemini 이미지] [인물 프로필] [퍼스널 브랜딩] [헤드샷] [나노바나나]
+
+---
+*Gemini 이미지(사고 모델)에 기준 인물 사진 1장을 올린 후, 아래 스타일 중 하나를 선택해 프롬프트를 복사해서 사용하세요.*
+
+**얼굴 유지 필요 시 앞에 추가**: `Keep the face and pose as in reference. Do not modify face or hairstyle.`
+
+---
+
+**스타일 1 — 시네마틱 스튜디오 화보**
+*강사·대표 소개, 브랜드 메인 비주얼용. 가장 '화보 같은' 느낌.*
+```
+Create an elegant cinematic studio portrait with professional fashion photography lighting. Subject in sophisticated pose against seamless backdrop. Three-point lighting setup: main key light with large softbox camera left creating soft shadows, fill light camera right at lower intensity, rim light behind subject for edge separation. Shot with 50mm prime lens, f/1.4 for dreamy background bokeh. Soft focus on background with sharp eyes. Color grading: rich, saturated tones with slight warmth. Professional retouching: smooth skin while maintaining natural texture, enhanced eyes, perfect white balance. High-end fashion editorial quality. Magazine-ready finish. --ar 1:1
+```
+
+**스타일 2 — 자연광 뷰티 포트레이트**
+*블로그 프로필, 친근한 개인 브랜딩용. 부드럽고 깨끗한 인상.*
+```
+Generate a natural light beauty portrait using only window light. Subject positioned near large window with soft diffused daylight. Window light as main source creating soft, flattering illumination with gentle shadows. Shot with 85mm lens, f/2.0. Bright, airy feel with predominantly white or light backgrounds. Natural skin texture maintained. Soft pastel color palette. Timeless natural portrait. --ar 1:1
+```
+
+**스타일 3 — 미니멀 모던 포트레이트**
+*브랜드 소개, 강의안 프로필, 카드형 소개 이미지용. 배경 깔끔.*
+```
+Generate a minimalist modern portrait with clean contemporary aesthetics. Subject against plain solid color background (white, gray, or bold single color). Clean composition following rule of thirds. Flat, even lighting minimizing shadows. Shot with 50mm lens, f/4 for overall sharpness. Neutral expression or subtle smile. Crisp, sharp focus throughout. Modern, sleek aesthetic. High-end minimalist design sensibility. --ar 1:1
+```
+
+**스타일 4 — 미국식 비즈니스 헤드샷**
+*링크드인, 명함, 제안서용. 정돈된 전문성.*
+```
+Create a professional corporate headshot portrait in American business style. Subject wearing a fitted black blazer over white shirt against a soft gradient blue-gray background. Natural studio lighting with key light at 45 degrees. Expression: confident, approachable, genuine smile with eyes engaged. Shot at eye level with 85mm lens equivalent, f/2.8 aperture for soft background blur. Sharp focus on eyes with catchlights visible. High resolution, realistic skin tones with natural texture. Photorealistic quality suitable for LinkedIn, corporate website, or business card. --ar 1:1
+```
+
+**스타일 5 — 모노크롬 에디토리얼**
+*포스터, 작가형 프로필, 콘셉트 있는 썸네일용.*
+```
+High-resolution monochrome portrait. Keep the face and pose as in reference. Outfit: crisp black turtleneck. Minimal white studio background with dramatic side lighting, casting long sharp shadows across the wall. Expression poised, elegant, cinematic atmosphere like a fashion editorial. Do not modify face or hairstyle.
+```
+---
+
+**강사 팁**: 처음엔 스타일 4(비즈니스 헤드샷)나 스타일 2(자연광)부터 시도하세요. 방향이 잡히면 의상·배경색만 바꿔 재생성하는 방식이 가장 안정적입니다.
+
+---
+
+## #311 인물 사진 세부 수정 — 빠른 파라미터 교체
+**근거**: 나노바나나 Gemini 이미지 가이드 (수정 패턴 실전 검증)
+**역할**: 이미지 수정 디렉터
+**난이도**: 초급
+**키워드**: [이미지 수정] [파라미터] [Gemini 이미지] [얼굴 유지] [배경 변경]
+
+---
+*아래 문장을 기존 프롬프트에 덧붙이거나 교체해서 사용하세요.*
+
+| 수정 항목 | 바로 복사할 문장 |
+|-----------|----------------|
+| 얼굴 유지 | `Keep the face and pose as in reference. Do not modify face or hairstyle.` |
+| 의상 변경 | `Outfit: navy suit.` / `Outfit: white shirt with no tie.` |
+| 배경 변경 | `Against a clean light-gray background.` / `Background: solid #1A1A1A studio tone.` |
+| 표정 변경 | `Expression: warm smile.` / `Expression: calm and confident.` / `Expression: calm and approachable.` |
+| 피부 보정 낮추기 | `natural skin retouching` (precision retouching 대신) |
+| 비율 지정 | `--ar 1:1` (정방형) / `--ar 4:5` (세로형) / `--ar 16:9` (가로형) |
+| 색조 조정 | `slight warmth` 삭제 → 차가운 느낌 / `warm golden tone` 추가 → 따뜻한 느낌 |
+
+---
+
+**강사 팁**: 첫 결과가 마음에 들면 조명·의상·배경만 조금씩 바꿔가며 재생성하는 것이 가장 효율적입니다. 전체 프롬프트를 새로 쓰기보다 한두 개 파라미터만 교체하세요.
+
+---
+
+## #312 고해상도 프로페셔널 변환 — 기존 사진을 AI 프로필로
+**근거**: 나노바나나 Gemini 이미지 가이드 + 강사 소개·링크드인 활용 패턴
+**역할**: 프로페셔널 이미지 리터칭 디렉터
+**난이도**: 초급
+**키워드**: [이미지 변환] [프로필 사진] [Gemini 이미지] [얼굴 구조 유지]
+
+---
+*기존 인물 사진을 올리고 아래 프롬프트를 사용하면, 얼굴 정체성을 유지하면서 조명·배경·디테일을 정제합니다.*
+
+```
+Transform this image into a high-resolution professional portrait while strictly maintaining the exact facial structure, identity, and key features of the subject. The subject should be wearing a crisp white shirt and a tailored black blazer with a confident expression. Apply an 85mm f/1.8 lens effect for shallow depth of field. Use 45-degree soft diffused lighting to refine facial contours. Set the background to a solid #1A1A1A studio tone. Perform precision retouching for skin texture (pores and fine lines) and sharpen clothing edges. Ensure a clean, editorial color grade with subtle warmth.
+```
+
+**자주 쓰는 수정**
+- 배경색 변경: `#1A1A1A` → 원하는 색상 코드로 교체 (예: `#FFFFFF` 흰색, `#2C3E50` 다크블루)
+- 표정 조정: `confident expression` → `calm and approachable expression`
+- 피부 보정 낮추기: `precision retouching` → `natural skin retouching`
+---
+
+**강사 팁**: `facial structure, identity, key features`를 유지하라고 명확히 적어야 얼굴이 과하게 바뀌는 것을 막을 수 있습니다. 이 문장을 빼면 AI가 이상적인 얼굴로 '개선'해버립니다.
 
 ---
