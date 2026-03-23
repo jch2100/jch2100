@@ -69,7 +69,6 @@
   - X(트위터): @skirano, @mattshumer_, @emaborevkina 등
   - YouTube: AI Jason, Matt Wolfe, All About AI 등
 - [ ] 한국 영향력자 리서치
-  - 강수진 프롬프트 엔지니어 (콘텐츠·관점 분석)
   - Threads: choi.openai (OpenAI 관련, 프롬프트 특화는 아님)
   - 기타 한국 AI 교육자/크리에이터
 - **찬훈님 할 일**: 팔로우하는 AI 관련 계정/채널 목록 공유
