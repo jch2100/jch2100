@@ -71,14 +71,16 @@ Lead는 아직 자격 검증이 되지 않은 초기 관심자다.
 
 ### BANTCH (무패영업, 다카하시 고이치 — BANT 확장)
 
-BANT에 두 가지 추가:
+| 항목 | 풀네임 | 의미 |
+|------|--------|------|
+| **B** | Budget | 예산 |
+| **A** | Authority | 의사결정 권한자 |
+| **N** | Needs | 니즈·과제 |
+| **T** | Timing | 도입 시기 |
+| **C** | Competitor | 경쟁사 (어떤 경쟁사와 비교 검토 중인지) |
+| **H** | Human Resources | 고객의 인적 자원 (도입 후 운용할 담당자·체제) |
 
-| 항목 | 의미 |
-|------|------|
-| **C**hampion | 고객사 내부에서 우리 편이 되어 주는 사람. 의사결정 구조를 알려주는 내부 조력자 |
-| **H** | 도입 장벽(Hurdle) 또는 구매 이력(History). 버전마다 해석 다름 |
-
-> Champion 확보가 복잡계 B2B 영업의 핵심. MEDDIC의 Champion 개념과 동일.
+> BANT에서 놓치기 쉬운 경쟁사 정보(C)와 고객사 내부 실행 역량(H)을 추가해 실패 요인을 사전에 파악하는 것이 핵심.
 
 ---
 
@@ -205,168 +207,12 @@ MBA 영업 과목의 기본. 제품 설명을 고객 가치로 연결하는 구�
 
 ---
 
-## 7. 기존 고객 관리 & 볼륨업 키워드 (신설, 2026-03-22)
-
-> #151~#158 프롬프트 작성을 위해 신설. 찬훈님 현장 관찰 기반.
-
-### KAM (Key Account Management) 핵심 용어
-
-| 용어 | 정의 |
-|------|------|
-| **KAM** (Key Account Management) | 핵심 고객사를 전략적으로 관리·성장시키는 체계. 단순 영업이 아닌 파트너십 관리 |
-| **Whitespace Mapping** | 기존 계정 내 미개척 수요 영역을 시각화하는 방법. 어느 부서·제품에 기회가 있는지 파악 |
-| **Account Health Score** | 계정의 건강도를 수치화한 지표. 제품 사용률, 참여도, NPS, 결제 이력 등 복합 지표 |
-| **Expansion Revenue** | 기존 고객으로부터 발생하는 추가 매출 (Upsell + Cross-sell) |
-| **NRR** (Net Revenue Retention) | 기존 고객 매출 유지율. 100% 이상이면 해지보다 확장이 많음. SaaS 핵심 지표 |
-| **GRR** (Gross Revenue Retention) | 확장 제외 순수 유지율. 이탈 측정의 가장 순수한 지표 |
-| **Churn Rate** | 기간 내 이탈 고객 비율. B2B SaaS 평균 4.2% (2024) |
-| **Champion** | 고객사 내 우리 제품의 내부 지지자. 의사결정 구조를 알려주고 도입을 도움 |
-| **Champion Risk** | 챔피언이 이직·이동할 경우 계정 전체를 잃을 위험 |
-| **Economic Buyer** | 최종 예산 집행 결정권자. Champion과 다른 사람일 수 있음 |
-| **Multi-threading** | 고객사 내 여러 부서·담당자와 동시에 관계를 구축하는 전략 (챔피언 단일화 리스크 방지) |
-| **Stakeholder Map** | 고객사 의사결정 관여자 전체를 시각화한 지도 |
-
----
-
-### Customer Success & Churn Prevention 핵심 용어
-
-| 용어 | 정의 |
-|------|------|
-| **CSM** (Customer Success Manager) | 계약 후 고객이 제품에서 가치를 얻도록 관리하는 담당자 |
-| **QBR** (Quarterly Business Review) | 분기별 전략 미팅. 성과 확인 + 다음 분기 목표 합의. 갱신율에 직결 |
-| **EBR** (Executive Business Review) | QBR의 임원 버전. 최소 반기 1회. 임원 참여 고객 갱신율 2.5배 (McKinsey) |
-| **Onboarding** | 신규 고객이 제품 가치를 경험하는 초기 90일 프로세스 |
-| **Time-to-Value** | 고객이 처음 실질적 가치를 경험하기까지의 시간. 짧을수록 이탈률 낮음 |
-| **Customer Health Score** | 제품 사용률, 로그인 빈도, 지원 티켓, NPS 등을 종합한 이탈 위험 예측 지표 |
-| **Leading Indicator** | 이탈을 예측하는 선행 지표. 로그인 감소, 기능 미사용, 결제 지연 등 |
-| **Lagging Indicator** | 이탈이 이미 발생한 후 확인되는 후행 지표. 해지 통보, NPS 급하락 등 |
-| **At-Risk Account** | 이탈 위험이 높다고 판단된 계정 |
-| **Renewal** | 계약 갱신. B2B SaaS에서 가장 중요한 영업 이벤트 |
-| **Expansion** | 기존 계약 범위를 초과하는 추가 판매 (Upsell + Cross-sell 포함) |
-| **Logo Retention** | 계정 수 기준 유지율 (금액과 무관하게 고객사 수로 측정) |
-| **Playbook** | 특정 상황에서 실행할 표준 대응 방식 (예: 챔피언 교체 플레이북) |
-
----
-
-### 이탈 조기 경보 신호 (B2B SaaS Research 2024 기반)
-
-| 신호 | 위험도 |
-|------|--------|
-| 로그인 빈도 30% 이상 감소 | 높음 |
-| 핵심 기능 미사용 90일 이상 | 높음 |
-| 지원 티켓 급증 | 중간 |
-| 결제 지연 2회 이상 | 높음 |
-| 의사결정자 이직 | 매우 높음 (이탈률 25% vs 재직 8%) |
-| QBR 취소 또는 연기 반복 | 중간 |
-| 담당자 응답 지연 3주 이상 | 중간 |
-| RFP 발송 또는 경쟁사 벤치마킹 요청 | 매우 높음 |
-
----
-
-## 8. 한국 B2B 영업 조직 구조 & 운영 키워드 (신설, 2026-03-22)
-
-> 딥리서치 기반 — 한국 시장 특화 용어 + 글로벌 SaaS 세일즈 조직 표준
-
-### 영업 조직 분업 체계 (더 모델 / The Model)
-
-| 용어 | 정의 |
-|------|------|
-| **The Model (더 모델)** | Marketo → Salesforce가 체계화한 영업 분업 구조. Marketing → SDR → AE → CSM의 역할 분화 |
-| **RevOps** (Revenue Operations) | 마케팅·영업·CS를 하나의 수익 파이프라인으로 통합 운영하는 조직 또는 기능 |
-| **SDR** (Sales Development Rep) | 아웃바운드 리드 발굴·자격검증 전담. SQL 만들어 AE에게 넘김 |
-| **BDR** (Business Development Rep) | 신규 시장·파트너 개척 담당. SDR과 유사하나 더 전략적 |
-| **AE** (Account Executive) | SQL → 클로징 담당 영업. 딜 오너 |
-| **CSM** (Customer Success Manager) | 계약 후 고객 성공 관리. 갱신·확장 리드 |
-| **SE** (Sales Engineer) | 기술 영업 지원. 데모·PoC·기술 문서 담당 |
-| **ABM** (Account-Based Marketing) | 특정 전략 계정을 마케팅·영업이 함께 집중 공략하는 방식. 대기업 영업에 특히 효과적 |
-| **PLG** (Product-Led Growth) | 제품 자체가 영업 채널. 무료 체험→자연 전환. Slack, Zoom, Notion 방식 |
-| **PLS** (Product-Led Sales) | PLG + 영업팀 결합. 제품 사용 데이터로 영업 타이밍 포착 |
-
----
-
-### 영업 성과 지표 (한국 B2B 벤치마크 포함)
-
-| 지표 | 정의 | 한국 벤치마크 |
-|------|------|------------|
-| **Win Rate** | 기회(Opportunity) 대비 성약 비율 | IT/SaaS 20~22%, 제조 19%, 금융 18% |
-| **Sales Cycle** | 첫 접촉→계약 평균 소요일 | 스타트업 고객 38일, 대기업 185일+ |
-| **Pipeline Coverage** | 목표 대비 파이프라인 규모 비율 | 적정 수준: **3.5~5x** |
-| **ACV** (Annual Contract Value) | 연간 계약 금액 | IT/SaaS AE 목표 쿼터: $800K(약 10.4억) |
-| **ARR** (Annual Recurring Revenue) | 연간 반복 매출 합계 | SaaS 핵심 지표 |
-| **MRR** (Monthly Recurring Revenue) | 월간 반복 매출 | ARR ÷ 12 |
-| **Quota Attainment** | 쿼터 달성률 | 전체 AE의 **30%**만 달성 (2024) |
-| **Lead-to-Customer Conversion** | 리드 전체 전환율 | **1~5%** |
-| **Inbound vs Outbound** | 인바운드 리드 전환율이 아웃바운드의 **8.6배** | — |
-
----
-
-### 한국 B2B 영업 특수 용어
-
-| 용어 | 의미 |
-|------|------|
-| **CSAP** | 클라우드 보안인증제. 공공기관 대상 SaaS는 필수 |
-| **나라장터** | 공공기관 조달 플랫폼. 정부·공공 B2B 영업의 핵심 채널 |
-| **약심위** | 병원 약품집 등재 심의위원회. 제약 영업의 핵심 관문 |
-| **PPAP** | 양산승인절차. 반도체/자동차 부품 납품 필수 프로세스 |
-| **RFI → RFP → RFQ** | 정보요청서 → 제안요청서 → 견적요청서. 대기업 조달 정식 절차 |
-| **VRB** (가치검토위원회) | B2B 복잡 딜에서 고객 내부 의사결정 기구. 4~5회 대응 필요 |
-| **파이프라인 역설** | 파이프라인 양 23% 증가, 승률 18% 하락 현상 (Ebsta 2024) |
-| **MZ 구매자** | MZ세대가 기업 구매 담당자의 64% 차지. 디지털 셀프서비스 선호 |
-
----
-
-## 9. SPIN Selling 심화 + 채널 관리 키워드 (2026-03-22 추가)
-
-### SPIN Selling 심화 개념
-
-| 용어 | 정의 |
-|------|------|
-| **Advance** | 대형 세일즈 각 콜의 목표 — 구체적 다음 행동 약속. "또 연락하겠습니다"는 Advance가 아님 (Rackham) |
-| **Continuation** | 다음 행동 없이 끝난 콜 — 사실상 실패 신호 (Rackham) |
-| **Implied Need** | 고객이 암묵적으로 느끼는 불편/문제 (아직 명확히 표현 안 됨) |
-| **Explicit Need** | 고객이 명확히 표현한 요구 ("우리는 X가 필요합니다") |
-| **Objection Prevention** | 이의제기를 처리하는 것이 아닌 SPIN 질문으로 사전에 방지 |
-| **Objection Handling** | 발생한 이의제기를 논리로 극복 — 소형 세일즈에서 유효, 대형에선 역효과 |
-| **Benefit** | 고객이 말한 Explicit Need를 해결해준다고 연결된 주장 (이의제기 ↓) |
-| **Advantage** | 제품 특장점 설명 — 니즈 연결 없이 제시 시 이의제기 ↑ |
-| **DMU** (Decision Making Unit) | 구매에 관여하는 모든 이해관계자 집합 |
-| **Implication Question** | 문제의 파급효과를 고객이 스스로 말하게 하는 질문 — SPIN의 핵심 |
-| **Need-Payoff Question** | 해결 시 가치를 고객이 직접 표현하게 하는 질문 |
-| **Situation Question** | 현재 상황 파악용 — 최소화해야 함 (고객 피로도 높음) |
-| **Problem Question** | 문제/불편 발굴 — 고객이 미처 인식 못한 문제 드러내기 |
-
-### 채널 관리 (Channel Management) 키워드
-
-| 용어 | 정의 |
-|------|------|
-| **직판** (Direct Sales) | 제조사/공급사가 최종 고객에게 직접 영업 |
-| **간접 채널** (Indirect Channel) | 총판·대리점·리셀러를 통한 영업 |
-| **Channel Conflict** | 직판과 채널 파트너 간, 또는 채널 파트너 간 이해 충돌 |
-| **Rules of Engagement** | 직판·채널 간 역할/고객/가격 규칙을 명문화한 문서 |
-| **Deal Registration** | 파트너가 특정 딜을 먼저 등록해 우선권을 보호받는 시스템 |
-| **Price Protection** | 제조사가 채널보다 낮은 가격으로 직판 금지하는 정책 |
-| **MDF** (Market Development Fund) | 채널 파트너의 마케팅 활동을 지원하는 공동 펀드 |
-| **Partner Enablement** | 채널 파트너가 효과적으로 영업할 수 있도록 교육/자료/도구 제공 |
-| **총판** (Master Distributor) | 제조사↔대리점 중간 계층. 재고 보유, 신용 제공 |
-| **VAR** (Value Added Reseller) | 제품에 기술·서비스를 추가해 재판매하는 파트너 |
-| **Channel Tiering** | 파트너를 성과/역량 기준으로 Gold/Silver/Bronze 등 등급 구분 |
-| **Territory Management** | 채널별 지역/산업/고객 규모 독점 구역 설정 |
-| **Dual Channel** | 직판+간접 채널을 동시에 운영하는 구조 |
-| **Sales Process** | 영업 단계를 문서화한 프로세스 (발굴→자격→제안→협상→수주) |
-| **Exit Criteria** | 다음 영업 단계로 이동하기 위한 객관적 기준 |
-| **Pipeline Stage** | CRM에서 딜의 현재 위치를 나타내는 단계 |
-
----
-
-## 10. 리서치 추가 필요 항목
+## 7. 리서치 추가 필요 항목
 
 - [ ] SNAP Selling (Jill Konrath) — 바쁜 구매자 대상 간소화 방법론
 - [ ] GAP Selling (Keenan) — 현재 상태 vs 이상 상태 갭 분석
 - [ ] Solution Selling (Michael Bosworth) — 문제 해결 중심
 - [ ] NEAT Selling — BANT의 현대적 대체
-- [x] ABM (Account-Based Marketing) — 키워드 추가 완료 (2026-03-22)
-- [x] 무패영업 저자 정정 완료 — 高橋浩一(다카하시 고이치), TORiX 대표 (2026-03-22)
-- [x] PLG/PLS — Product-Led Growth/Sales 키워드 추가 완료 (2026-03-22)
-- [ ] Customer Success 전문 방법론 (Gainsight CS 프레임워크)
-- [x] SPIN Selling 심화 키워드 추가 완료 (2026-03-22)
-- [x] 채널 관리(Channel Management) 키워드 추가 완료 (2026-03-22)
+- [ ] Account-Based Marketing (ABM)과 영업 연계
+- [ ] 무패영업 BANTCH 원전 확인 (강민호 저서 직접 참조 필요)
+- [ ] SaaS 특화 영업 지표 심화 (PLG, Product-Led Growth)
