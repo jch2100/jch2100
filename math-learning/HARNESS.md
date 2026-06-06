@@ -90,14 +90,17 @@ AI를 쓰면 역치가 낮아진다. (레슨 1 참고)
 |--------|------|------|-----------|
 | Le Corbusier | 1948 | Modulor 시스템 | 검증완료 |
 | Joan Meyers-Levy & Rui Zhu | 2007 | 천장 높이와 사고방식 (Cathedral Effect) | 검증완료 |
-| Kahneman & Tversky | 1974 | 가용성 편향 | 미검증 |
-| B.F. Skinner | 1950s | 가변 비율 강화 | 미검증 |
-| Leon Festinger | 1954 | 사회비교 이론 | 미검증 |
-| Kahneman | 프로스펙트 이론 | 손실 회피 λ=2.25 | 미검증 |
-| Hermann Ebbinghaus | 1885 | 망각 곡선 | 미검증 |
-| Lev Vygotsky | 1934 | ZPD | 미검증 |
-| Robert Bjork | 1994 | Desirable Difficulties | 미검증 |
-| Michael Norton | 2011 | IKEA 효과 | 미검증 |
+| Kahneman & Tversky | 1974 | 가용성 편향 | 검증완료 |
+| B.F. Skinner | 1950s | 가변 비율 강화 | 검증완료 |
+| Leon Festinger | 1954 | 사회비교 이론 | 검증완료 |
+| Kahneman & Tversky | 1979 | 프로스펙트 이론, 손실 회피 약 2배 | 검증완료 |
+| Hermann Ebbinghaus | 1885 | 망각 곡선 | 검증완료 |
+| Lev Vygotsky | 1934 | ZPD | 검증완료 |
+| Robert Bjork | 1994 | Desirable Difficulties | 검증완료 |
+| Norton, Mochon & Ariely | 2011 | IKEA 효과 | 검증완료 |
+| Eleanor Maguire et al. | 2000 | 런던 택시 기사 해마 연구 | 검증완료 |
+| Gloria Mark et al. | 2008 | 알림 후 집중 복귀 23분 | 검증완료 |
+| Kulik & Kulik | 1988 | 즉각 피드백과 학습 효율 | 검증완료 |
 
 검증 방법: `/lesson-review` 스킬 실행 또는 직접 검색.
 검증 완료 시 위 표의 "미검증"을 "검증완료"로 교체한다.
