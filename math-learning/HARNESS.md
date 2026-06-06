@@ -88,8 +88,8 @@ AI를 쓰면 역치가 낮아진다. (레슨 1 참고)
 
 | 연구자 | 연도 | 주제 | 검증 여부 |
 |--------|------|------|-----------|
-| Le Corbusier | 1948 | Modulor 시스템 | 미검증 |
-| Joan Meyers-Levy | 2007 | 천장 높이와 사고방식 | 미검증 |
+| Le Corbusier | 1948 | Modulor 시스템 | 검증완료 |
+| Joan Meyers-Levy & Rui Zhu | 2007 | 천장 높이와 사고방식 (Cathedral Effect) | 검증완료 |
 | Kahneman & Tversky | 1974 | 가용성 편향 | 미검증 |
 | B.F. Skinner | 1950s | 가변 비율 강화 | 미검증 |
 | Leon Festinger | 1954 | 사회비교 이론 | 미검증 |
