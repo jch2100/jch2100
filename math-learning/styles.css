@@ -1,0 +1,41 @@
+/* 수학 학습지 스타일 */
+
+body {
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+/* 오늘의 질문 섹션 강조 */
+h2:first-of-type + p {
+  font-size: 1.05em;
+}
+
+/* 수평선 여백 */
+hr {
+  margin: 2em 0;
+  opacity: 0.3;
+}
+
+/* 표 스타일 */
+table {
+  font-size: 0.95em;
+}
+
+/* 수식 가독성 */
+.math.display {
+  overflow-x: auto;
+  padding: 0.5em 0;
+}
+
+/* 연습 문제 구분 */
+h2:has(+ p > strong) {
+  margin-top: 2em;
+}
+
+/* 한 줄 정리 강조 */
+h2:last-of-type {
+  border-top: 2px solid #dee2e6;
+  padding-top: 1em;
+  margin-top: 2em;
+}

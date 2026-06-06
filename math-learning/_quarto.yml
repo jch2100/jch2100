@@ -1,0 +1,98 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "시험이 끝나면 수학도 끝난 줄 알았다"
+  subtitle: "40대가 일상에서 다시 발견한 37가지 수학의 순간"
+  author: "정찬훈"
+  date: "2025"
+  repo-url: https://github.com/jch2100/jch2100
+  repo-branch: claude/adult-math-learning-0F3mL
+  repo-subdir: math-learning
+  sharing: [twitter, linkedin]
+
+  chapters:
+    - index.qmd
+    - part: "프롤로그"
+      chapters:
+        - ch0-intro/lesson-prologue.md
+    - part: "1장 — 수학은 어디서 왔는가"
+      chapters:
+        - ch1-history/lesson-nile-math.md
+        - ch1-history/lesson-sexagesimal.md
+        - ch1-history/lesson-perfect-numbers.md
+        - ch1-history/lesson-calendar.md
+        - ch1-history/lesson-ceiling-height.md
+    - part: "2장 — 직관이 틀리는 순간"
+      chapters:
+        - ch2-probability/lesson-lottery.md
+        - ch2-probability/lesson-sns-addiction.md
+        - ch2-probability/lesson-birthday-paradox.md
+        - ch2-probability/lesson-coin-hothand.md
+        - ch2-probability/lesson-airplane-vs-car.md
+    - part: "3장 — 어떻게 배워야 기억에 남는가"
+      chapters:
+        - ch3-learning/lesson-ondemand.md
+        - ch3-learning/lesson-guessing-strategy.md
+        - ch3-learning/lesson-retrieval-practice.md
+        - ch3-learning/lesson-speed-reading-myth.md
+        - ch3-learning/lesson-fast-learner.md
+    - part: "4장 — 투자자가 모르는 수학"
+      chapters:
+        - ch4-finance/lesson-rule-of-72.md
+        - ch4-finance/lesson-inflation.md
+        - ch4-finance/lesson-volatility-drag.md
+        - ch4-finance/lesson-lump-sum-vs-dca.md
+        - ch4-finance/lesson-correlation.md
+        - ch4-finance/lesson-efficient-frontier.md
+        - ch4-finance/lesson-fee-compound.md
+        - ch4-finance/lesson-qqq-ten-years.md
+        - ch4-finance/lesson-promise-statistics.md
+        - ch4-finance/lesson-kelly-criterion.md
+        - ch4-finance/lesson-mortgage.md
+    - part: "5장 — 성공을 오해하는 방식"
+      chapters:
+        - ch5-success/lesson-compound-habit.md
+        - ch5-success/lesson-regression-mean.md
+        - ch5-success/lesson-survivorship-bias.md
+        - ch5-success/lesson-eq-vs-iq.md
+        - ch5-success/lesson-grit.md
+    - part: "부록 — 현장의 수학"
+      chapters:
+        - appendix-construction/lesson-345-rule.md
+        - appendix-construction/lesson-ladder-angle.md
+        - appendix-construction/lesson-slope-gradient.md
+        - appendix-construction/lesson-material-waste.md
+        - appendix-construction/lesson-concrete-mix.md
+
+format:
+  html:
+    theme: cosmo
+    lang: ko
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    mainfont: "Noto Sans KR, sans-serif"
+    code-fold: true
+    html-math-method: katex
+    css: styles.css
+
+  pdf:
+    documentclass: book
+    lang: ko
+    pdf-engine: xelatex
+    mainfont: "Noto Sans CJK KR"
+    sansfont: "Noto Sans CJK KR"
+    monofont: "Noto Sans Mono CJK KR"
+    fontsize: 11pt
+    number-sections: false
+    colorlinks: true
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - left=30mm
+      - right=25mm
+    include-in-header:
+      text: |
+        \usepackage{kotex}
